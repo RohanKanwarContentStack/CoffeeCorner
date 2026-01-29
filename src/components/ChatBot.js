@@ -11,7 +11,7 @@ import {
   searchProducts,
 } from '../services/dataService';
 
-const AUTOMATIONS_API_URL = 'https://app.contentstack.com/automations-api/run/ff9457d2062a42ffb651ce142f897b75';
+const AUTOMATIONS_API_URL = process.env.REACT_APP_AUTOMATIONS_API_URL || '';
 const FALLBACK_TEXT = 'I didn\'t understand. Try: "Tell me about Espresso", "Recommend hot drinks", or "What categories are there?"';
 
 const STOP_WORDS = ['recommend', 'suggest', 'drink', 'drinks', 'pastry', 'pastries', 'item', 'items', 'about', 'on', 'a', 'an', 'the', 'with', 'in', 'for', 'to'];
@@ -100,6 +100,7 @@ const ChatBot = () => {
   }, [isOpen]);
 
   const callAutomationsApi = async (message) => {
+    if (!AUTOMATIONS_API_URL) return FALLBACK_TEXT;
     try {
       const res = await fetch(AUTOMATIONS_API_URL, {
         method: 'POST',

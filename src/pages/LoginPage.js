@@ -105,8 +105,9 @@ const LoginPage = () => {
               </label>
             </div>
             <div className="signup-section">
-              <p className="signup-text">New to CoffeeCorner?</p>
-              <Link to="/signup" className="signup-link">Sign up now</Link>
+              <p className="signup-text">
+                New to CoffeeCorner? <Link to="/signup" className="signup-link">Sign up now</Link>
+              </p>
             </div>
           </form>
         </div>
