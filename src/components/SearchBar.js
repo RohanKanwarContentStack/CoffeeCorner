@@ -1,5 +1,5 @@
 /**
- * SearchBar - Same pattern as CineVerse; searches products.
+ * SearchBar - Product search input and submit.
  */
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useSearchParams, useNavigate } from 'react-router-dom';

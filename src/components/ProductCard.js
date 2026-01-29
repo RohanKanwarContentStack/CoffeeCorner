@@ -1,5 +1,5 @@
 /**
- * ProductCard - Reused pattern from CineVerse MovieCard.
+ * ProductCard - Product card for menu and grids.
  * Links to product detail; shows image, title, price, category.
  */
 import React from 'react';
@@ -13,10 +13,10 @@ const ProductCard = ({ product }) => {
   return (
     <Link
       to={`/product/${product.slug}`}
-      className="movie-card product-card"
+      className="product-card product-card-cc"
       aria-label={accessibleTitle}
     >
-      <div className="movie-card-image product-card-image">
+      <div className="product-card-image product-card-image-cc">
         <img
           src={imageUrl}
           alt={`${product.title}`}
@@ -31,12 +31,12 @@ const ProductCard = ({ product }) => {
           </div>
         )}
       </div>
-      <div className="movie-card-content product-card-content">
-        <h3 className="movie-card-title">{product.title}</h3>
-        <div className="movie-card-meta product-card-meta">
+      <div className="product-card-content">
+        <h3 className="product-card-title">{product.title}</h3>
+        <div className="product-card-meta">
           <span className="product-price">{priceStr}</span>
           {product.category?.name && (
-            <span className="genre-tag">{product.category.name}</span>
+            <span className="category-tag">{product.category.name}</span>
           )}
         </div>
       </div>

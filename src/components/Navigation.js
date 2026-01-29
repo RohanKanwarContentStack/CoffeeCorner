@@ -1,11 +1,12 @@
 /**
- * Navigation - Same structure as CineVerse; links: Home, Menu, Cart, Search.
+ * Navigation - Main nav: Home, Menu, Cart, Search.
  */
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import SearchBar from './SearchBar';
 import UserMenu from './UserMenu';
+import { CoffeeLogo } from './LogoHeader';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +39,7 @@ const Navigation = () => {
     <nav className={`navigation ${isScrolled ? 'scrolled' : ''}`} role="navigation" aria-label="Main navigation">
       <div className="nav-container">
         <Link to="/home" className="nav-logo" aria-label="CoffeeCorner Home">
-          <span className="nav-logo-emoji" aria-hidden="true">☕</span>
+          <span className="nav-logo-icon" aria-hidden="true"><CoffeeLogo /></span>
           <span className="nav-logo-text">CoffeeCorner</span>
         </Link>
 
@@ -61,14 +62,14 @@ const Navigation = () => {
           </Link>
           <Link
             to="/cart"
-            className={`nav-link nav-link-watchlist ${isActiveLink('/cart') ? 'active' : ''}`}
+            className={`nav-link nav-link-cart ${isActiveLink('/cart') ? 'active' : ''}`}
             role="menuitem"
             aria-current={isActiveLink('/cart') ? 'page' : undefined}
           >
-            <span className="watchlist-nav-icon">🛒</span>
+            <span className="cart-nav-icon">🛒</span>
             Cart
             {cartCount > 0 && (
-              <span className="watchlist-badge">{cartCount}</span>
+              <span className="cart-badge">{cartCount}</span>
             )}
           </Link>
         </div>

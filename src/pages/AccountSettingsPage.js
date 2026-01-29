@@ -1,12 +1,12 @@
 /**
- * AccountSettingsPage - Same structure as CineVerse; simplified.
+ * AccountSettingsPage - Account settings.
  */
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const AccountSettingsPage = () => {
-  const { user, logout, selectedProfile } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
@@ -37,12 +37,6 @@ const AccountSettingsPage = () => {
           <div className="setting-row-info">
             <div className="setting-row-label">Email</div>
             <div className="setting-row-value">{user?.email}</div>
-          </div>
-        </div>
-        <div className="setting-row">
-          <div className="setting-row-info">
-            <div className="setting-row-label">Current profile</div>
-            <div className="setting-row-value">{selectedProfile?.profile_name || selectedProfile?.name || '—'}</div>
           </div>
         </div>
       </div>

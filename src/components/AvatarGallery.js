@@ -1,5 +1,5 @@
 /**
- * AvatarGallery - Emoji-based; same pattern as CineVerse, no modal.
+ * AvatarGallery - Emoji-based avatar picker for profiles.
  */
 import React from 'react';
 import { AVATARS } from '../data/avatars';

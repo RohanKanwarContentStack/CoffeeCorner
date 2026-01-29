@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import logger from './utils/logger';
-// Load personalize config (reads REACT_APP_CONTENTSTACK_PERSONALIZE_* and NEXT_PUBLIC_*)
-import './services/personalizeService';
 
 window.__CONTENTSTACK_CONFIG__ = {
   apiKey: process.env.REACT_APP_CONTENTSTACK_API_KEY,

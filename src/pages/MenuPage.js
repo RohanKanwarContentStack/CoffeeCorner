@@ -1,5 +1,5 @@
 /**
- * MenuPage - Full product listing; same structure as CineVerse MoviesPage.
+ * MenuPage - Full product listing.
  */
 import React, { useState, useEffect } from 'react';
 import { getAllProducts, getAllCategories } from '../services/dataService';
@@ -31,11 +31,11 @@ const MenuPage = () => {
   }
 
   return (
-    <div className="movies-page">
-      <div className="movies-page-header">
-        <div className="movies-page-title-section">
-          <h1 className="movies-page-title">Our Menu</h1>
-          <p className="movies-page-subtitle">
+    <div className="menu-page menu-page-cc">
+      <div className="menu-page-header">
+        <div className="menu-page-title-section">
+          <h1 className="menu-page-title">Our Menu</h1>
+          <p className="menu-page-subtitle">
             Browse drinks and pastries. Filter by category below.
           </p>
         </div>
@@ -62,9 +62,9 @@ const MenuPage = () => {
       )}
 
       {displayedProducts.length > 0 ? (
-        <div className="movies-grid">
+        <div className="products-grid">
           {displayedProducts.map((product) => (
-            <div key={product.uid} className="movie-card-wrapper">
+            <div key={product.uid} className="product-card-wrapper">
               <ProductCard product={product} />
             </div>
           ))}

@@ -1,6 +1,6 @@
 /**
  * CartContext - Cart and checkout state.
- * Adapted from CineVerse WatchlistContext: cart items with quantity, add/remove/update, toast.
+ * Cart items with quantity, add/remove/update, toast.
  */
 
 import React, {
@@ -16,20 +16,14 @@ const CartContext = createContext(null);
 const CART_STORAGE_KEY = 'coffeecorner_cart';
 
 export const CartProvider = ({ children }) => {
-  const { user, selectedProfile } = useAuth();
+  const { user } = useAuth();
   const [cart, setCart] = useState([]);
   const [toast, setToast] = useState(null);
 
   const getStorageKey = useCallback(() => {
-    if (user && selectedProfile) {
-      const profileId =
-        selectedProfile._metadata?.uid ||
-        selectedProfile.profile_name ||
-        selectedProfile.name;
-      return `${CART_STORAGE_KEY}_${user.uid}_${profileId}`;
-    }
+    if (user?.uid) return `${CART_STORAGE_KEY}_${user.uid}`;
     return CART_STORAGE_KEY;
-  }, [user, selectedProfile]);
+  }, [user?.uid]);
 
   useEffect(() => {
     const key = getStorageKey();

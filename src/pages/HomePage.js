@@ -1,5 +1,5 @@
 /**
- * HomePage - Featured and trending drinks; same structure as CineVerse HomePage (simplified).
+ * HomePage - Featured and trending drinks.
  */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -35,16 +35,6 @@ const HomePage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handlePrevTrending = () => {
-    setCurrentTrendingIndex((prev) =>
-      prev === 0 ? trendingProducts.length - 1 : prev - 1
-    );
-  };
-
-  const handleNextTrending = () => {
-    setCurrentTrendingIndex((prev) => (prev + 1) % trendingProducts.length);
-  };
-
   if (loading) {
     return (
       <div className="loading-screen">
@@ -58,7 +48,7 @@ const HomePage = () => {
   const bannerUrl = currentTrending?.image || 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&h=1080&fit=crop';
 
   return (
-    <div className="home-page-new">
+    <div className="home-page-new home-cc">
       <div className="hero-banner-enhanced">
         <div
           className="hero-parallax-bg"
@@ -85,7 +75,7 @@ const HomePage = () => {
             </div>
             {currentTrending.description && (
               <p className="hero-description-expandable">
-                {currentTrending.description.substring(0, 150)}...
+                {currentTrending.description}
               </p>
             )}
             <div className="hero-cta-group">
@@ -107,13 +97,6 @@ const HomePage = () => {
         )}
 
         <div className="hero-carousel-controls">
-          <button
-            className="carousel-nav-btn carousel-prev"
-            onClick={handlePrevTrending}
-            aria-label="Previous"
-          >
-            &lt;
-          </button>
           <div className="hero-thumbnails">
             {trendingProducts.map((product, index) => (
               <button
@@ -131,13 +114,6 @@ const HomePage = () => {
               </button>
             ))}
           </div>
-          <button
-            className="carousel-nav-btn carousel-next"
-            onClick={handleNextTrending}
-            aria-label="Next"
-          >
-            &gt;
-          </button>
         </div>
 
         {scrollY < 50 && (
@@ -149,15 +125,15 @@ const HomePage = () => {
       </div>
 
       <div className="home-content-full">
-        <section className="home-movies-only-section">
+        <section className="home-products-section">
           <div className="section-header">
             <h2 className="section-title">Featured Drinks & Pastries</h2>
             <p className="section-subtitle">Handpicked for you</p>
           </div>
           {featuredProducts.length > 0 ? (
-            <div className="movies-grid-home">
+            <div className="products-grid-home">
               {featuredProducts.map((product) => (
-                <div key={product.uid} className="movie-card-wrapper">
+                <div key={product.uid} className="product-card-wrapper">
                   <ProductCard product={product} />
                 </div>
               ))}

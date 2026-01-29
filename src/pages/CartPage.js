@@ -1,5 +1,5 @@
 /**
- * CartPage - Cart listing with quantities and checkout; same structure as CineVerse WatchlistPage.
+ * CartPage - Cart listing with quantities and checkout.
  */
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -9,14 +9,14 @@ const CartPage = () => {
   const { cart, removeFromCart, updateQuantity, clearCart, cartTotal } = useCart();
 
   return (
-    <div className="watchlist-page">
-      <div className="watchlist-header">
-        <div className="watchlist-title-section">
-          <h1 className="watchlist-title">
-            <span className="watchlist-icon">🛒</span>
+    <div className="cart-page cart-page-cc">
+      <div className="cart-header">
+        <div className="cart-title-section">
+          <h1 className="cart-title">
+            <span className="cart-icon">🛒</span>
             My Cart
           </h1>
-          <p className="watchlist-subtitle">
+          <p className="cart-subtitle">
             {cart.length === 0
               ? 'Your cart is empty. Add drinks or pastries from the menu!'
               : `${cart.reduce((sum, i) => sum + i.quantity, 0)} item(s) · Total $${cartTotal.toFixed(2)}`
@@ -25,7 +25,7 @@ const CartPage = () => {
         </div>
         {cart.length > 0 && (
           <button
-            className="clear-watchlist-btn"
+            className="clear-cart-btn"
             onClick={() => {
               if (window.confirm('Clear entire cart?')) clearCart();
             }}
@@ -37,7 +37,7 @@ const CartPage = () => {
       </div>
 
       {cart.length === 0 ? (
-        <div className="watchlist-empty">
+        <div className="cart-empty">
           <div className="empty-illustration">
             <span className="empty-icon">☕</span>
           </div>
@@ -48,29 +48,29 @@ const CartPage = () => {
           </Link>
         </div>
       ) : (
-        <div className="watchlist-grid">
+        <div className="cart-grid">
           {cart.map((item, index) => {
             const product = item.product;
             const imageUrl = product.image || 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=300&h=300&fit=crop';
             return (
               <div
                 key={product.uid}
-                className="watchlist-card"
+                className="cart-card"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <Link to={`/product/${product.slug}`} className="watchlist-card-link">
-                  <div className="watchlist-card-poster">
+                <Link to={`/product/${product.slug}`} className="cart-card-link">
+                  <div className="cart-card-poster">
                     <img src={imageUrl} alt={product.title} loading="lazy" />
-                    <div className="watchlist-card-overlay">
+                    <div className="cart-card-overlay">
                       <span className="play-icon">☕</span>
                     </div>
                   </div>
                 </Link>
-                <div className="watchlist-card-info">
+                <div className="cart-card-info">
                   <Link to={`/product/${product.slug}`}>
-                    <h3 className="watchlist-card-title">{product.title}</h3>
+                    <h3 className="cart-card-title">{product.title}</h3>
                   </Link>
-                  <div className="watchlist-card-meta">
+                  <div className="cart-card-meta">
                     <span className="meta-year">${product.price?.toFixed(2)} each</span>
                   </div>
                   <div className="cart-quantity-row" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
@@ -97,7 +97,7 @@ const CartPage = () => {
                   </div>
                 </div>
                 <button
-                  className="remove-from-watchlist-btn"
+                  className="remove-from-cart-btn"
                   onClick={(e) => {
                     e.preventDefault();
                     removeFromCart(product.uid);

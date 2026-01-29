@@ -1,5 +1,5 @@
 /**
- * ProductDetailPage - Product details and Add to Cart; same structure as CineVerse MovieDetailPage.
+ * ProductDetailPage - Product details and Add to Cart.
  */
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
@@ -70,8 +70,8 @@ const ProductDetailPage = () => {
   const bannerUrl = product.image || imageUrl;
 
   return (
-    <div className="movie-detail-page">
-      <section className="movie-detail-header-parallax">
+    <div className="product-detail-page product-detail-cc">
+      <section className="product-detail-header-parallax">
         <div
           className="parallax-backdrop"
           style={{
@@ -92,17 +92,17 @@ const ProductDetailPage = () => {
                   alt={`${product.title}`}
                   className="poster-image-3d"
                 />
-                <div className="poster-actions">
+                <div className="poster-actions poster-actions-cc">
                   <button
-                    className="action-btn primary"
+                    className="action-btn primary add-to-cart-btn-cc"
                     onClick={handleAddToCart}
                     aria-label="Add to cart"
                   >
                     <span className="icon">🛒</span>
                     <span>Add to Cart</span>
                   </button>
-                  <div className="quantity-selector" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.5rem' }}>
-                    <label htmlFor="qty">Qty:</label>
+                  <div className="quantity-selector quantity-selector-cc">
+                    <label htmlFor="qty">Qty</label>
                     <input
                       id="qty"
                       type="number"
@@ -110,7 +110,7 @@ const ProductDetailPage = () => {
                       max={99}
                       value={quantity}
                       onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value, 10) || 1))}
-                      style={{ width: '4rem', padding: '0.25rem', color: '#111' }}
+                      aria-label="Quantity"
                     />
                   </div>
                 </div>
@@ -118,28 +118,30 @@ const ProductDetailPage = () => {
             </div>
 
             <div className="details-column">
-              <h1 className="movie-title-enhanced">{product.title}</h1>
-              <div className="meta-row-enhanced">
-                <span className="meta-item">${product.price?.toFixed(2)}</span>
-                {product.category?.name && (
-                  <>
-                    <span className="meta-divider">•</span>
-                    <span className="meta-item">{product.category.name}</span>
-                  </>
-                )}
-              </div>
-              {product.category && (
-                <div className="genre-pills">
-                  <Link to={`/menu?category=${product.category.slug}`} className="genre-pill">
-                    <span className="genre-icon">☕</span>
-                    <span>{product.category.name}</span>
-                  </Link>
+              <div className="detail-content-card detail-content-card-cc">
+                <h1 className="product-title-enhanced product-detail-title-cc">{product.title}</h1>
+                <div className="meta-row-enhanced meta-row-cc">
+                  <span className="meta-item meta-price-cc">${product.price?.toFixed(2)}</span>
+                  {product.category?.name && (
+                    <>
+                      <span className="meta-divider">•</span>
+                      <span className="meta-item meta-type-cc">{product.category.name}</span>
+                    </>
+                  )}
                 </div>
-              )}
-              <div className="synopsis-section">
-                <h2>Description</h2>
-                <div className="synopsis-text">
-                  <p>{product.description}</p>
+                {product.category && (
+                  <div className="genre-pills">
+                    <Link to={`/menu?category=${product.category.slug}`} className="genre-pill">
+                      <span className="genre-icon">☕</span>
+                      <span>{product.category.name}</span>
+                    </Link>
+                  </div>
+                )}
+                <div className="synopsis-section synopsis-cc">
+                  <h2>Description</h2>
+                  <div className="synopsis-text">
+                    <p>{product.description}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -155,9 +157,9 @@ const ProductDetailPage = () => {
       </section>
 
       {similarProducts.length > 0 && (
-        <div className="similar-movies-section">
+        <div className="similar-products-section">
           <h2 className="section-title">You Might Also Like</h2>
-          <div className="similar-movies-grid">
+          <div className="similar-products-grid">
             {similarProducts.map((p) => (
               <ProductCard key={p.uid} product={p} />
             ))}

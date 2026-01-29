@@ -1,5 +1,5 @@
 /**
- * ProfileAvatar - Emoji-based for CoffeeCorner (same API as CineVerse).
+ * ProfileAvatar - Emoji-based avatar for CoffeeCorner profiles.
  */
 import React from 'react';
 import { getAvatarById, DEFAULT_AVATAR } from '../data/avatars';

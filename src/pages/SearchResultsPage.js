@@ -1,5 +1,5 @@
 /**
- * SearchResultsPage - Product search results; same structure as CineVerse SearchResultsPage.
+ * SearchResultsPage - Product search results.
  */
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
@@ -40,16 +40,16 @@ const SearchResultsPage = () => {
         <title>{query ? `Search: ${query} - CoffeeCorner` : 'Search - CoffeeCorner'}</title>
         <meta name="description" content={`Search results for "${query}" on CoffeeCorner. Found ${results.length} items.`} />
       </Helmet>
-      <div className="search-results-page">
+      <div className="search-results-page search-results-cc">
         <div className="search-header">
           <h1>Search Results</h1>
           <p className="search-query">Showing results for: <strong>"{query}"</strong></p>
           <p className="search-count">{results.length} item(s) found</p>
         </div>
         {results.length > 0 ? (
-          <div className="movies-grid">
+          <div className="products-grid">
             {results.map((product) => (
-              <div key={product.uid} className="movie-card-wrapper">
+              <div key={product.uid} className="product-card-wrapper">
                 <ProductCard product={product} />
               </div>
             ))}

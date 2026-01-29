@@ -4,22 +4,12 @@ import { useAuth } from '../context/AuthContext';
 
 const UserMenu = () => {
   const [open, setOpen] = useState(false);
-  const { logout, selectedProfile } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate('/login');
-  };
-
-  const handleManageProfiles = () => {
-    setOpen(false);
-    navigate('/profiles');
-  };
-
-  const handleSwitchProfile = () => {
-    setOpen(false);
-    navigate('/switch-profile');
   };
 
   return (
@@ -47,14 +37,8 @@ const UserMenu = () => {
           <div className="user-menu-overlay" onClick={() => setOpen(false)} />
           <div className="user-menu-dropdown">
             <div className="user-menu-header">
-              <strong>{selectedProfile?.profile_name || selectedProfile?.name || 'User'}</strong>
+              <strong>{user?.username || user?.email || 'User'}</strong>
             </div>
-            <button className="user-menu-item" onClick={handleManageProfiles} type="button">
-              👥 Manage Profiles
-            </button>
-            <button className="user-menu-item" onClick={handleSwitchProfile} type="button">
-              🔄 Switch Profile
-            </button>
             <button
               className="user-menu-item logout-button"
               onClick={() => {

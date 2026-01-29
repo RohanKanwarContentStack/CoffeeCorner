@@ -1,6 +1,6 @@
 /**
  * CoffeeCorner data service - in-memory product catalog.
- * Uses same env vars as CineVerse (Contentstack); when configured could switch to CMS.
+ * Can use Contentstack env vars when configured for CMS.
  */
 
 import {
@@ -13,7 +13,7 @@ import {
 } from '../data/products';
 import logger from '../utils/logger';
 
-// Contentstack env - same as CineVerse (used when/if CMS is enabled)
+// Contentstack env (used when/if CMS is enabled)
 const CONTENTSTACK_API_KEY = process.env.REACT_APP_CONTENTSTACK_API_KEY;
 const CONTENTSTACK_DELIVERY_TOKEN = process.env.REACT_APP_CONTENTSTACK_DELIVERY_TOKEN;
 const CONTENTSTACK_ENVIRONMENT = process.env.REACT_APP_CONTENTSTACK_ENVIRONMENT || 'testing';

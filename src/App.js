@@ -1,34 +1,64 @@
 /**
- * CoffeeCorner App - Same structure as CineVerse.
- * Routes: login, signup, profiles, home, menu, product/:slug, cart, checkout, search.
+ * CoffeeCorner App
+ * Routes: login, signup, home, menu, product/:slug, cart, checkout, search, account.
  */
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navigation from './components/Navigation';
 import Toast from './components/Toast';
+import { CoffeeLogo } from './components/LogoHeader';
 import DataInitializer from './components/DataInitializer';
 import ThemeInitializer from './components/ThemeInitializer';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
-import CreateProfilePage from './pages/CreateProfilePage';
-import SelectProfilePage from './pages/SelectProfilePage';
-import SwitchProfilePage from './pages/SwitchProfilePage';
 import AccountSettingsPage from './pages/AccountSettingsPage';
-import ManageProfilesPage from './pages/ManageProfilesPage';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import SearchResultsPage from './pages/SearchResultsPage';
+import ChatBot from './components/ChatBot';
 import './styles/App.css';
 
 const Footer = () => (
   <footer className="footer">
-    <p>&copy; 2025 CoffeeCorner. Your Daily Brew.</p>
+    <div className="footer-inner">
+      <div className="footer-top">
+        <div className="footer-brand">
+          <span className="footer-logo">
+            <span className="footer-logo-icon" aria-hidden="true"><CoffeeLogo /></span>
+            CoffeeCorner
+          </span>
+          <p className="footer-tagline">Your Daily Brew.</p>
+        </div>
+        <nav className="footer-nav" aria-label="Footer navigation">
+          <div className="footer-nav-block">
+            <span className="footer-nav-title">Shop</span>
+            <Link to="/home">Home</Link>
+            <Link to="/menu">Menu</Link>
+            <Link to="/cart">Cart</Link>
+          </div>
+          <div className="footer-nav-block">
+            <span className="footer-nav-title">Company</span>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#locations">Locations</a>
+          </div>
+          <div className="footer-nav-block">
+            <span className="footer-nav-title">Legal</span>
+            <a href="#privacy">Privacy</a>
+            <a href="#terms">Terms</a>
+          </div>
+        </nav>
+      </div>
+      <div className="footer-bottom">
+        <p className="footer-copy">&copy; 2025 CoffeeCorner. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 );
 
@@ -40,7 +70,8 @@ function App() {
           <DataInitializer>
             <ThemeInitializer />
             <Toast />
-            <div className="App">
+            <div className="App app-coffeecorner">
+              <ChatBot />
               <Routes>
                 <Route path="/" element={<Navigate to="/login" replace />} />
                 <Route path="/login" element={<LoginPage />} />
@@ -51,24 +82,6 @@ function App() {
                     <p>This feature is coming soon!</p>
                     <a href="/login" className="btn btn-primary">Back to Login</a>
                   </div>
-                } />
-                <Route path="/create-profile" element={<CreateProfilePage />} />
-                <Route path="/select-profile" element={<SelectProfilePage />} />
-                <Route path="/switch-profile" element={
-                  <ProtectedRoute requireProfile={false}>
-                    <SwitchProfilePage />
-                  </ProtectedRoute>
-                } />
-                <Route path="/profiles" element={
-                  <ProtectedRoute requireProfile={false}>
-                    <>
-                      <Navigation />
-                      <main className="main-content">
-                        <ManageProfilesPage />
-                      </main>
-                      <Footer />
-                    </>
-                  </ProtectedRoute>
                 } />
                 <Route path="/account" element={
                   <ProtectedRoute>

@@ -1,6 +1,6 @@
 /**
  * DataInitializer - Renders children immediately (products are in-memory).
- * Kept for same structure as CineVerse; no API call needed.
+ * Placeholder for any app-level data init; no API call needed.
  */
 import React from 'react';
 
