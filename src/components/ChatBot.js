@@ -4,6 +4,7 @@
  */
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import {
   getAllProducts,
   getProductsByCategory,
@@ -13,6 +14,13 @@ import {
 
 const AUTOMATIONS_API_URL = process.env.REACT_APP_AUTOMATIONS_API_URL || '';
 const FALLBACK_TEXT = 'I didn\'t understand. Try: "Tell me about Espresso", "Recommend hot drinks", or "What categories are there?"';
+
+const INITIAL_MESSAGES = [
+  {
+    type: 'bot',
+    text: 'Need help? Ask for a drink or pastry, or say what you\'re in the mood for.\n\n• Tell me about [name]\n• Recommend a [Hot Drinks / Cold Drinks / Pastries]\n• Suggest something [chocolate / espresso / etc.]\n• What categories are there?',
+  },
+];
 
 const STOP_WORDS = ['recommend', 'suggest', 'drink', 'drinks', 'pastry', 'pastries', 'item', 'items', 'about', 'on', 'a', 'an', 'the', 'with', 'in', 'for', 'to'];
 
@@ -67,21 +75,26 @@ const isInRequiredFormat = (message) => {
 
 const ChatBot = () => {
   const location = useLocation();
+  const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      type: 'bot',
-      text: 'Need help? Ask for a drink or pastry, or say what you\'re in the mood for.\n\n• Tell me about [name]\n• Recommend a [Hot Drinks / Cold Drinks / Pastries]\n• Suggest something [chocolate / espresso / etc.]\n• What categories are there?',
-    },
-  ]);
+  const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const lastProductRef = useRef(null);
+  const prevUserRef = useRef(user);
 
   const hideOnPaths = ['/', '/login', '/signup', '/forgot-password'];
   const isHidden = hideOnPaths.some((p) => location.pathname === p);
+
+  useEffect(() => {
+    if (prevUserRef.current && !user) {
+      setMessages(INITIAL_MESSAGES);
+      lastProductRef.current = null;
+    }
+    prevUserRef.current = user;
+  }, [user]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
